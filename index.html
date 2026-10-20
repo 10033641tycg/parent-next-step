@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>先接住，再處理</title>
+<meta name="description" content="孩子的性影像被散布、被威脅時，家長的下一步行動指引">
+<style>
+:root{
+  --bg:#f6f3ee; --card:#ffffff; --ink:#2b2a28; --muted:#6b675f; --line:#e4ded3;
+  --accent:#2f6f6a; --accent-ink:#ffffff; --accent-soft:#e3efed;
+  --warn:#a8442f; --warn-soft:#f7e6e1; --dont:#8a5a12; --dont-soft:#faf0dc;
+  --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1b1d1c; --card:#252827; --ink:#ece8e1; --muted:#a8a39a; --line:#383c3a;
+    --accent:#6fb5ad; --accent-ink:#10201e; --accent-soft:#233a37;
+    --warn:#e58b74; --warn-soft:#3a2722; --dont:#e0b35e; --dont-soft:#3a3020;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1b1d1c; --card:#252827; --ink:#ece8e1; --muted:#a8a39a; --line:#383c3a;
+  --accent:#6fb5ad; --accent-ink:#10201e; --accent-soft:#233a37;
+  --warn:#e58b74; --warn-soft:#3a2722; --dont:#e0b35e; --dont-soft:#3a3020;
+  --shadow:none;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei","Heiti TC",sans-serif;
+  font-size:17px; line-height:1.75; letter-spacing:.02em;
+}
+.top{
+  position:sticky; top:0; z-index:5; background:var(--bg);
+  border-bottom:1px solid var(--line);
+  padding:10px 16px; display:flex; align-items:center; gap:10px;
+}
+.brand{font-weight:700; font-size:15px; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.exit{
+  border:0; background:var(--warn); color:#fff; font:inherit; font-size:14px; font-weight:700;
+  padding:6px 12px; border-radius:999px; cursor:pointer; white-space:nowrap;
+}
+main{max-width:640px; margin:0 auto; padding:20px 16px 48px}
+.card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:var(--shadow); margin-bottom:16px}
+h1{font-size:26px; line-height:1.4; margin:4px 0 12px}
+h2{font-size:21px; line-height:1.45; margin:0 0 12px}
+h3{font-size:17px; margin:0 0 8px}
+p{margin:0 0 12px}
+.lead{color:var(--muted)}
+.step-tag{display:inline-block; font-size:13px; color:var(--accent); background:var(--accent-soft); padding:2px 10px; border-radius:999px; margin-bottom:10px; font-weight:600}
+.opts{display:flex; flex-direction:column; gap:10px; margin-top:8px}
+.opt{
+  text-align:left; font:inherit; color:var(--ink); background:var(--card);
+  border:1.5px solid var(--line); border-radius:14px; padding:14px 16px; cursor:pointer;
+  transition:border-color .15s, background .15s;
+}
+.opt:hover,.opt:focus-visible{border-color:var(--accent); background:var(--accent-soft); outline:none}
+.opt b{display:block; font-size:17px}
+.opt span{display:block; font-size:14px; color:var(--muted); margin-top:2px}
+.btn{
+  display:inline-block; font:inherit; font-weight:700; border:0; border-radius:12px;
+  padding:12px 18px; cursor:pointer; background:var(--accent); color:var(--accent-ink); text-decoration:none;
+}
+.btn.ghost{background:transparent; color:var(--accent); border:1.5px solid var(--accent)}
+.nav{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px}
+.say{background:var(--accent-soft); border-radius:14px; padding:16px; margin-bottom:16px}
+.say h3{color:var(--accent)}
+.say ul{margin:0; padding-left:0; list-style:none}
+.say li{margin:6px 0; padding-left:14px; border-left:3px solid var(--accent)}
+.say .avoid{margin-top:10px; font-size:15px; color:var(--muted)}
+ol.todo{list-style:none; margin:0; padding:0; counter-reset:t}
+ol.todo li{counter-increment:t; display:flex; gap:12px; padding:12px 0; border-top:1px solid var(--line)}
+ol.todo li:first-child{border-top:0}
+ol.todo input{width:22px; height:22px; margin-top:4px; accent-color:var(--accent); flex:none}
+ol.todo .n::before{content:counter(t) "．"; font-weight:700; color:var(--accent)}
+ol.todo li.done .txt{opacity:.5}
+ol.todo .txt b{display:block}
+ol.todo .txt small{display:block; color:var(--muted); font-size:15px; line-height:1.65; margin-top:2px}
+.dont{background:var(--dont-soft); border-radius:14px; padding:16px; margin-bottom:16px}
+.dont h3{color:var(--dont)}
+.dont ul{margin:0; padding-left:20px}
+.dont li{margin:4px 0}
+.urgent{background:var(--warn-soft); border:1.5px solid var(--warn); border-radius:16px; padding:20px; margin-bottom:16px}
+.urgent h2{color:var(--warn)}
+.res{display:flex; flex-direction:column; gap:10px}
+.r{border:1px solid var(--line); border-radius:12px; padding:12px 14px; display:flex; gap:12px; align-items:center}
+.r .info{flex:1; min-width:0}
+.r .info b{display:block}
+.r .info small{display:block; color:var(--muted); font-size:14px; line-height:1.55}
+.r a{flex:none; font-weight:700; color:var(--accent-ink); background:var(--accent); text-decoration:none; padding:8px 12px; border-radius:10px; font-size:15px; white-space:nowrap}
+.r a.web{background:transparent; color:var(--accent); border:1.5px solid var(--accent)}
+.r .acts{display:flex; flex-direction:column; gap:6px}
+details{border-top:1px solid var(--line); padding:12px 0}
+details:first-of-type{border-top:0}
+summary{cursor:pointer; font-weight:700; list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"＋ "; color:var(--accent)}
+details[open] summary::before{content:"－ "}
+details p,details ul{margin:8px 0 0; color:var(--ink)}
+details ul{padding-left:20px}
+.note{font-size:14px; color:var(--muted)}
+.foot{font-size:13px; color:var(--muted); text-align:center; margin-top:24px; line-height:1.7}
+.progress{height:4px; background:var(--line); border-radius:4px; overflow:hidden; margin-bottom:16px}
+.progress i{display:block; height:100%; background:var(--accent); transition:width .3s}
+.door{display:block; width:100%; text-align:left; font:inherit; color:var(--ink); background:var(--card); border:1.5px solid var(--line); border-radius:16px; padding:18px; cursor:pointer; margin-bottom:12px; box-shadow:var(--shadow)}
+.door:hover,.door:focus-visible{border-color:var(--accent); outline:none}
+.door.hot{border-color:var(--warn)}
+.door b{display:block; font-size:19px; margin-bottom:4px}
+.door.hot b{color:var(--warn)}
+.door span{display:block; font-size:15px; color:var(--muted)}
+.sec{margin-bottom:16px}
+.sec:last-child{margin-bottom:0}
+.sec h3{color:var(--accent)}
+.sec ul{margin:0 0 8px; padding-left:20px}
+.sec li{margin:4px 0}
+.quote{background:var(--accent-soft); border-left:3px solid var(--accent); border-radius:0 10px 10px 0; padding:10px 14px; margin:8px 0}
+.quote p{margin:4px 0}
+.bad{background:var(--dont-soft); border-left:3px solid var(--dont); border-radius:0 10px 10px 0; padding:10px 14px; margin:8px 0; font-size:15px}
+.bad p{margin:4px 0}
+.linkbtn{display:block; width:100%; text-align:left; font:inherit; font-weight:700; color:var(--accent); background:var(--accent-soft); border:0; border-radius:12px; padding:14px 16px; cursor:pointer; margin-bottom:16px}
+@media print{
+  .top,.nav,.exit,.progress,.no-print{display:none!important}
+  body{background:#fff; color:#000; font-size:13px}
+  .card,.say,.dont,.urgent{box-shadow:none; border:1px solid #bbb; break-inside:avoid}
+  details{display:block} details>*{display:block}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">先接住，再處理</div>
+  <button class="exit" id="exitBtn" title="立即離開並跳到 Google">快速離開</button>
+</header>
+<main id="app" aria-live="polite"></main>
+
+<script>
+(function(){
+"use strict";
+
+/* ===== 求助資源（2026 年 10 月查核） ===== */
+var RES = {
+  r110:{name:"110 報案",desc:"警察機關，24 小時",tel:"110"},
+  r119:{name:"119",desc:"有自傷行為或受傷時",tel:"119"},
+  r113:{name:"113 保護專線",desc:"24 小時，社工接聽，可諮詢、通報",tel:"113"},
+  siarc:{name:"衛福部 性影像處理中心",desc:"諮詢專線 9:00–22:00 全年無休；線上申訴 24 小時可填，申請平台下架",tel:"0266057373",telLabel:"撥打",url:"https://siarc.mohw.gov.tw/",urlLabel:"申訴"},
+  siarcChat:{name:"性影像處理中心 文字諮詢",desc:"9:00–22:00，不想講電話時可用",url:"https://siarc.mohw.gov.tw/consult.php",urlLabel:"開啟"},
+  tid:{name:"Take It Down",desc:"未滿 18 歲時拍攝的影像適用。在自己裝置產生影像辨識碼，影像本身不上傳，供合作平台攔截",url:"https://takeitdown.ncmec.org/",urlLabel:"開啟"},
+  w885:{name:"Web885 網路諮詢熱線",desc:"台灣展翅協會，孩子或家長都可以諮詢",url:"https://www.web885.org.tw/",urlLabel:"開啟"},
+  w547:{name:"Web547 網路檢舉熱線",desc:"台灣展翅協會，檢舉兒少性影像內容",url:"https://www.web547.org.tw/",urlLabel:"檢舉"},
+  r1925:{name:"1925 安心專線",desc:"24 小時心理支持，家長與孩子都可撥打",tel:"1925"},
+  laf:{name:"法律扶助基金會",desc:"法律諮詢與扶助；手機請撥 02-412-8518",tel:"024128518",telLabel:"撥打"}
+};
+
+/* ===== 對孩子說的話（共用） ===== */
+var SAY_CORE = [
+  "謝謝你願意讓我知道。",
+  "這不是你的錯，錯的是散布、威脅你的人。",
+  "我現在很緊張，但我不是在生你的氣。",
+  "我們一起處理，你不用一個人扛。"
+];
+var SAY_AVOID = "先別問：「你為什麼要拍？」「我不是早就說過了？」「你怎麼這麼笨？」這些話會讓孩子關上門，也可能讓孩子下次遇到事情不敢開口。";
+
+/* ===== 節點 ===== */
+var N = {
+  start:{
+    type:"intro"
+  },
+  safety:{
+    type:"q", tag:"第 1 步・確認安全", pct:20,
+    title:"孩子現在有沒有立即的危險？",
+    lead:"例如：孩子說想死或想傷害自己、已經有自傷行為；或對方知道你家住址、約孩子見面、正在不斷逼迫。",
+    opts:[
+      {t:"有，或我不確定",s:"先處理安全",go:"urgent"},
+      {t:"沒有，孩子目前安全",s:"繼續下一步",go:"type"}
+    ]
+  },
+  urgent:{type:"urgent"},
+  type:{
+    type:"q", tag:"第 2 步・現在的狀況", pct:50,
+    title:"下面哪一個最接近你遇到的情況？",
+    lead:"選一個最接近的就好，之後可以回來看其他狀況。",
+    opts:[
+      {t:"孩子的性影像已經被散布",s:"被傳到群組、網站、社群，或同學之間在流傳（包含未經同意拍攝、以 AI 合成的影像）",go:"spread"},
+      {t:"有人拿影像威脅孩子",s:"要錢、要更多影像、要見面，不然就要公開或傳給親友",go:"extort"},
+      {t:"孩子傳了影像給別人，目前還沒看到散布",s:"傳給交往對象、網友，或被要求拍攝後傳出",go:"sent"},
+      {t:"孩子手機裡有別人的性影像，或孩子轉傳過",s:"在群組收到、被傳來，或孩子曾經轉傳",go:"holder"},
+      {t:"還不確定，只是聽說，孩子不肯說",s:"從學校、其他家長或蛛絲馬跡得知",go:"unsure"}
+    ]
+  },
+
+  spread:{
+    type:"plan", tag:"行動指引", title:"孩子的性影像已經被散布",
+    lead:"時間很重要，但順序更重要：先接住孩子，再保全證據，然後下架與報案同步進行。",
+    todo:[
+      ["先穩住孩子，確認孩子的安全","留意孩子有沒有說出想消失、想死的話。這個階段孩子最需要的是確定你站在他這邊。"],
+      ["保全證據：截圖「頁面資訊」，不要存影像本身","截下影像所在的網址、平台或群組名稱、散布者的帳號名稱與帳號 ID、時間。不要另存、下載或轉傳影像本身。孩子手機裡的相關對話先不要刪除。"],
+      ["向性影像處理中心申訴下架","線上申訴 24 小時都可以填。兒少案件可一併詢問「兒少性影像轉碼比對移除」，讓平台攔截同一影像再次上傳。"],
+      ["帶孩子到警察局報案","可到派出所或縣市警察局婦幼警察隊。帶著孩子的手機與截圖。警方可聲請搜索扣押對方持有的影像，從源頭阻止散布。"],
+      ["散布者是同學或事情發生在學校，通知學校","聯繫導師、輔導室或學務處。學校知悉後依法須通報並啟動處理，也能處理同儕間的二次傷害。"],
+      ["安排孩子的後續心理支持","事件後幾週到幾個月，孩子可能出現睡不好、不想上學、躲避社群等反應，這些都需要被持續關心。"]
+    ],
+    dont:[
+      "自己去找散布者理論、在網路上公開喊話或肉搜對方",
+      "在社群上公開貼文求助，這會讓更多人知道是哪個孩子",
+      "把影像轉傳給親友或老師「讓他們看看」，轉傳本身就可能構成散布",
+      "要孩子一再描述細節，報案時說一次就好",
+      "沒收手機當作處罰。若需要暫時保管作為證據，要跟孩子說清楚原因"
+    ],
+    res:["siarc","r110","r113","w547","r1925"]
+  },
+
+  extort:{
+    type:"plan", tag:"行動指引", title:"有人拿影像威脅孩子",
+    lead:"這是性勒索，是刑事犯罪。對方的目的是讓孩子害怕到不敢說，孩子願意讓你知道，已經打破對方最大的籌碼。",
+    todo:[
+      ["立刻停止回應對方","不要付錢、不要再傳任何影像、不要答應見面。付錢或交付影像，通常只會換來更多要求。"],
+      ["先保全證據，再封鎖","先不要封鎖對方、不要刪除帳號或對話。截下對方帳號名稱、帳號 ID、個人頁網址、完整對話、威脅內容、要求匯款的帳號與時間。保全完成後再封鎖，並把孩子的帳號改為不公開。"],
+      ["儘速報警","撥 110 或到派出所報案。警方可依法聲請搜索扣押對方手中的影像，並透過保護措施禁止對方重製、散布。"],
+      ["防止或處理散布","若影像已被散布，向性影像處理中心申訴下架。若還沒被散布，可用 Take It Down 在孩子自己的裝置上產生影像辨識碼，影像本身不會上傳。"],
+      ["檢查孩子其他帳號的設定","對方常揚言要傳給孩子的親友。把好友名單與追蹤名單設為不公開，必要時先提醒少數親近的家人。"],
+      ["留意孩子的自傷風險","被勒索的孩子常有強烈的羞愧與恐懼。若孩子說出想消失的話，請立即尋求協助。"]
+    ],
+    dont:[
+      "替孩子付錢「息事寧人」",
+      "自己假扮孩子跟對方周旋或談判",
+      "在證據保全前就刪除帳號、對話或封鎖對方",
+      "責怪孩子當初為什麼要傳"
+    ],
+    res:["r110","siarc","tid","r113","r1925"],
+    more:{go:"boys",t:"事情穩下來之後：怎麼跟孩子談性與網路安全 →"}
+  },
+
+  sent:{
+    type:"plan", tag:"行動指引", title:"孩子傳了影像給別人，目前還沒看到散布",
+    lead:"這一步可以做的事最多。先弄清楚對方是誰、孩子是不是被要求或施壓。",
+    todo:[
+      ["不責備，先了解經過","對方是同學、交往對象，還是網路上認識的人？是孩子主動，還是被要求、被哄騙、被施壓？"],
+      ["對方是網友或對孩子施壓索取：保全對話並報警","網友以交友、交往、稱讚等方式索取兒少的影像，本身就可能是兒少性剝削。先截圖對方帳號與對話，再報警。"],
+      ["對方是同儕：先諮詢，不要私下威嚇對方","可先向性影像處理中心或 Web885 諮詢如何請對方刪除。不要自己找對方或對方家長施壓，以免影像被刻意散布。必要時透過學校處理。"],
+      ["用 Take It Down 預防散布","在孩子自己的裝置上替這張影像產生辨識碼，合作平台可據以攔截。影像本身不會上傳。"],
+      ["不要自己上網搜尋影像","留意孩子是否被提起、被要求更多影像或被威脅，若有，改照「有人拿影像威脅孩子」處理。"],
+      ["等情緒穩定後再談界線","談的是：沒有人有權用「愛我就傳」來要求你；任何時候被要求，都可以拒絕，也可以回來找我。"]
+    ],
+    dont:[
+      "立刻要孩子跟對方斷絕往來，卻不了解孩子的處境",
+      "自己找對方家長興師問罪",
+      "把這件事當作孩子的品行問題處理"
+    ],
+    res:["tid","siarc","w885","r110"]
+  },
+
+  holder:{
+    type:"plan", tag:"行動指引", title:"孩子手機裡有別人的性影像，或孩子轉傳過",
+    lead:"影像中的孩子是被害人。你接下來的處理，可能是阻止這份影像繼續散布的關鍵。",
+    todo:[
+      ["先了解來源","誰傳的、在哪個群組、影像中的人孩子是否認識、孩子有沒有再傳給別人。"],
+      ["立即停止轉傳","不要傳給老師或其他家長「求證」，轉傳本身就可能構成散布。"],
+      ["截圖來源資訊，不截取影像本身","記錄群組名稱、傳送者帳號、時間等資訊即可。"],
+      ["向性影像處理中心或 Web547 檢舉","依專業建議處理裝置中的影像，不要自行判斷後就刪除了事。"],
+      ["孩子曾轉傳或持有：儘早諮詢法律協助","持有或散布兒少性影像涉及刑事或少年事件程序。儘早諮詢法律扶助基金會或律師，誠實配合調查。"],
+      ["和孩子談","有沒有群組壓力、怕被排擠？也請孩子想想，影像中的那個人現在可能是什麼感受。"],
+      ["知道影像中的孩子是誰：透過學校協助","讓學校與對方家長介入，不要自己私下聯絡或傳話。"]
+    ],
+    dont:[
+      "把影像轉給任何人看，包括想幫忙的大人",
+      "要孩子馬上刪掉、當作沒發生過",
+      "公開討論影像中的孩子是誰"
+    ],
+    res:["siarc","w547","laf","w885"]
+  },
+
+  unsure:{
+    type:"plan", tag:"行動指引", title:"還不確定，只是聽說，孩子不肯說",
+    lead:"先別急著要答案。孩子願不願意開口，取決於他判斷說出來之後會發生什麼事。",
+    todo:[
+      ["不要自己上網搜尋影像","下載或保存可能涉及法律問題，也會加深你的焦慮。"],
+      ["找一個安靜、不被打擾的時間，先表明立場再提問","例如：「我聽說了一些事，我很擔心你。不管發生什麼，我都不會生你的氣，我想跟你一起處理。」"],
+      ["孩子不想說，不逼問","告訴孩子有不經過你也能求助的地方，例如 Web885、性影像處理中心文字諮詢，讓孩子知道自己有選擇。"],
+      ["從學校或其他家長得知：向學校確認","確認學校是否已知悉並啟動處理。"],
+      ["家長可以先諮詢","打給性影像處理中心或 113，先了解有哪些選項。"]
+    ],
+    dont:[
+      "趁孩子不在時翻手機，被發現後孩子會更封閉",
+      "用處罰或斷網逼孩子說出來",
+      "在孩子面前跟其他大人討論這件事"
+    ],
+    res:["siarc","siarcChat","w885","r113"]
+  },
+
+  /* ===== 已經處理過了：事後單元 ===== */
+  after:{
+    type:"hub", tag:"已經處理過了",
+    title:"接下來的日子，你可以這樣陪孩子",
+    lead:"報案、通報這些最急的事情已經做完了。接下來比較長的路，是孩子的復原，以及你們之間的信任。可以從任何一個單元開始看。",
+    items:[
+      {go:"talkagain",t:"事後怎麼跟孩子重新談這件事",s:"什麼時候談、說什麼、孩子自責或不想談時怎麼辦"},
+      {go:"boys",t:"跟男孩談性與網路安全",s:"針對詐財型性勒索：拆掉迷思、怎麼開口、孩子要知道的紅旗訊號"},
+      {go:"watch",t:"復原期要留意的訊號",s:"哪些反應是正常的，哪些需要找專業協助"},
+      {go:"process",t:"接下來的調查與司法流程",s:"警察、社工還會做什麼，為什麼可能很久沒有消息"},
+      {go:"again",t:"對方又來聯繫，或有人說能付費刪影像",s:"常見的第二波詐騙，以及怎麼應對"}
+    ],
+    res:["siarc","r113","r1925"]
+  },
+
+  talkagain:{
+    type:"guide", tag:"事後單元", title:"事後怎麼跟孩子重新談這件事",
+    lead:"不需要一次談完，也不需要問出所有細節。目標只有一個：讓孩子知道，這件事沒有改變你對他的看法。",
+    secs:[
+      {h:"什麼時候談",
+       p:["等孩子情緒稍微穩定，通常是事件後幾天到幾週。避開剛做完筆錄、剛被訪視的當天，孩子那時已經很累了。",
+          "選孩子比較放鬆的時候，不必刻意正式坐下來。一句話帶到就好，孩子不想多說也沒關係。"]},
+      {h:"可以這樣開口",
+       say:["「我想再跟你聊一下那件事。不是要問細節，是想知道你現在還好嗎。」",
+            "「那天你願意告訴我，我一直記得。如果是我在你那個年紀，不一定說得出口。」"]},
+      {h:"三件要讓孩子聽到的事",
+       list:["錯的是騙你、威脅你的人，不是你。",
+             "這件事不會改變我對你的看法，我們家也不會因此把你當成不一樣的人。",
+             "以後再遇到任何事，不管多丟臉，都可以來找我。"]},
+      {h:"孩子自責時",
+       p:["孩子常會說「是我太笨」「都是我害的」。不要急著說「對啊你下次要小心」，那會坐實孩子的自責。"],
+       say:["「對方是專門做這件事的人，很多大人也被騙過。你會上當，是因為對方很專業，不是因為你笨。」"]},
+      {h:"孩子不想談時",
+       p:["尊重孩子的步調。可以留一句話給他，讓他知道門是開著的："],
+       say:["「好，那我們先不談。你想說的時候，隨時都可以。」"]},
+      {h:"手機和網路怎麼辦",
+       p:["全面禁止上網很難執行，也容易讓孩子下次出事時更不敢說。比較好的做法，是跟孩子一起調整設定，讓他參與決定。"],
+       list:["帳號改為不公開，好友與追蹤名單隱藏",
+             "關閉陌生人私訊，或設定訊息過濾",
+             "檢查有沒有不認識的裝置登入，必要時更換密碼",
+             "約好遇到奇怪訊息時，先截圖給你看，不用自己處理"]},
+      {h:"你自己要注意的",
+       bad:["不要在孩子面前反覆提起，或用這件事提醒他「你看吧」",
+            "不要在親友間轉述，就算是出於關心",
+            "家裡其他人（兄弟姊妹、長輩）如果知道了，請他們不要拿來開玩笑"]}
+    ]
+  },
+
+  boys:{
+    type:"guide", tag:"事後單元", title:"跟男孩談性與網路安全",
+    lead:"詐財型性勒索的被害人以青少年男孩為大宗。對方多半不是真的女生，而是境外詐騙集團，從搭訕到勒索，常常一兩個小時內就完成。",
+    secs:[
+      {h:"先拆掉大人自己的迷思",
+       p:["很多家長、甚至孩子自己會想：「男生被女生主動搭訕是好事」「男生不會是被害人」「會被騙就是因為太色」。這些想法，正是孩子出事時不敢開口的原因。",
+          "孩子對性好奇、會想看、會心動，是這個年紀很正常的事。被騙的原因是對方很專業，不是孩子的品行有問題。"]},
+      {h:"怎麼開口",
+       p:["男孩通常比較能接受「並肩」的談話，而不是面對面坐下來的「大談話」。開車、一起吃宵夜、一起打遊戲的時候，用新聞或別人的事情切入，比直接問「你有沒有」有效得多。"],
+       say:["「我看到新聞說，有男生在網路上被假裝成女生的人騙，開視訊後被威脅要錢。你覺得那個男生當下會怎麼想？」",
+            "「你們同學之間，有聽過這種事嗎？」"]},
+      {h:"把「好奇」和「被騙」分開講",
+       say:["「你會想看、會好奇，這很正常，我年輕的時候也是。」",
+            "「但網路上有一群人，專門利用男生的好奇來騙錢。被騙不是你的錯，是他們很會。」"]},
+      {h:"給孩子一張「免死金牌」",
+       p:["孩子不說，最常見的原因是怕被罵、怕被沒收手機。先把這兩個擔心拆掉，而且要說得很明確："],
+       say:["「不管你傳了什麼、付了多少錢，只要你來告訴我，我不會罵你，也不會沒收你的手機。我們一起處理。」"],
+       p2:"說了就要做到。孩子會用你第一次的反應，決定要不要相信這句話。"},
+      {h:"孩子要知道的紅旗訊號",
+       list:["剛認識就很主動、很熱情，很快就聊到身體或性",
+             "很快要求換到別的 App 聊天",
+             "要求開視訊、交換照片，或說「你先傳我才傳」",
+             "對方鏡頭不開、畫面怪怪的，或一直說鏡頭壞了",
+             "要求用遊戲點數、超商代碼、虛擬貨幣付款",
+             "給倒數時間，並秀出你的好友名單說要傳給他們"]},
+      {h:"萬一發生了：四個動作",
+       list:["停：不再回覆對方",
+             "截：截下對方帳號、對話和威脅內容",
+             "不付：付錢不會讓事情結束，只會讓對方知道你會付",
+             "找大人：告訴家人，或打給 113、性影像處理中心"],
+       p2:"可以直接跟孩子說：對方說要在幾分鐘內公開，是為了讓你慌張到沒辦法思考。你有時間找大人。"},
+      {h:"家裡其他人的反應，影響很大",
+       p:["父親、哥哥或其他男性長輩一句「你也太好騙」「被妹子騙喔」，可能比事件本身更傷人，也會讓孩子以後什麼都不說。請家裡的大人先有共識：這件事不開玩笑。"]},
+      {h:"談性不是一次性的大談話",
+       p:["不必一次講完。平常看到新聞、劇情、廣告時，順口聊兩句，讓「性」和「網路安全」變成家裡可以談的話題。孩子知道可以跟你談，比記住任何規則都重要。"]}
+    ]
+  },
+
+  watch:{
+    type:"guide", tag:"事後單元", title:"復原期要留意的訊號",
+    lead:"事件後幾週到幾個月，孩子出現情緒和生活上的變化是常見的。你要做的不是要孩子「趕快好起來」，而是留意變化的程度和持續時間。",
+    secs:[
+      {h:"常見的反應",
+       list:["睡不好、做惡夢，或睡得特別多",
+             "食慾改變",
+             "不想上學、不想見同學，或突然不想用社群",
+             "反過來一直盯著手機，擔心影像被傳出去",
+             "容易生氣、煩躁，或變得很安靜"]},
+      {h:"需要找專業協助的情況",
+       list:["上面的反應持續超過兩週，而且影響到上學或日常生活",
+             "孩子說出「沒意義」「想消失」「如果我不在就好了」這類的話",
+             "突然要錢、拿家裡的錢，或問怎麼買遊戲點數（可能又被威脅）",
+             "半夜情緒崩潰卻不肯說原因"]},
+      {h:"孩子說出想死或想消失的話",
+       p:["不要迴避，也不要說「不要亂講」。可以直接問：「你是不是有想過要傷害自己？」直接問不會讓孩子更想做，反而讓他知道可以說。",
+          "有任何自傷的言語或行為，請立即撥打 1925 安心專線，或 119、110。"]},
+      {h:"可以去哪裡找心理支持",
+       p:["可以向負責你們的社工提出，由縣市政府評估轉介心理諮商；也可以找學校輔導室。家長自己需要說話時，1925 安心專線是 24 小時。"]}
+    ],
+    res:["r1925","r119","r113"]
+  },
+
+  process:{
+    type:"guide", tag:"事後單元", title:"接下來的調查與司法流程",
+    lead:"報案和通報之後，還會有一段時間的程序。先知道會發生什麼，比較不會在接到電話時慌張。",
+    secs:[
+      {h:"警察可能還會再聯繫",
+       p:["偵辦過程中，警方可能請孩子補充說明或指認。兒少被害人在偵查或審理中受詢問時，縣市政府會指派社工陪同。你可以請求盡量減少孩子重複陳述。"]},
+      {h:"縣市政府社工的角色",
+       p:["社工的工作是評估孩子的安全與需要，並提供陪同、心理、法律等協助，不是在調查家長做錯什麼。有新的狀況、孩子情緒變化、或對流程有疑問，都可以主動聯繫負責的社工。"]},
+      {h:"為什麼可能很久沒有消息",
+       p:["詐財型性勒索多由境外集團犯案，偵辦需要時間，可能很長一段時間都沒有進度。這不代表報案沒有用，報案紀錄是後續追查與申請各項協助的依據。"]},
+      {h:"如果之後發現影像出現在網路上",
+       p:["向性影像處理中心申訴下架，並告知負責的社工或承辦員警。記錄影像出現的網址與時間，不要另存或轉傳影像本身。"]},
+      {h:"法律協助",
+       p:["如果需要了解告訴、保護措施或求償的選項，可以諮詢法律扶助基金會。"]}
+    ],
+    res:["siarc","laf","r113"]
+  },
+
+  again:{
+    type:"guide", tag:"事後單元", title:"對方又來聯繫，或有人說能付費刪影像",
+    lead:"事件結束後，常會出現第二波騷擾或詐騙。先讓孩子知道可能會發生，他遇到時比較不會慌。",
+    secs:[
+      {h:"原本的人換帳號再來",
+       p:["集團可能用新帳號重新聯繫，說影像還在、要再付錢。處理方式跟第一次一樣："],
+       list:["不回應、不付錢",
+             "截下新帳號與對話內容",
+             "告訴承辦員警或負責的社工，新的帳號資料對偵辦有幫助"]},
+      {h:"有人說可以幫忙刪除影像，但要收費",
+       p:["自稱駭客、警察、律師、平台人員，說付費就能刪掉影像或抓到犯人，多半是第二波詐騙，專門找已經被勒索過的人下手。"],
+       bad:["政府的下架申訴管道不收任何費用",
+            "警察不會要你付錢才辦案",
+            "任何要求先付費、轉帳、買點數的「協助」，都先停下來，跟社工或警察確認"]},
+      {h:"可以先跟孩子說好",
+       say:["「如果之後又有人來找你，不管說什麼，你先截圖給我看就好，不用自己回。我們一起判斷。」"]}
+    ],
+    res:["siarc","r110","r113"]
+  }
+};
+
+/* ===== 狀態 ===== */
+var app = document.getElementById("app");
+var stack = [];
+var checks = {};
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+function resItem(id){
+  var r = RES[id]; if(!r) return "";
+  var acts = "";
+  if(r.tel) acts += '<a href="tel:'+r.tel+'">'+(r.telLabel||("撥 "+esc(r.name.split(" ")[0])))+'</a>';
+  if(r.url) acts += '<a class="web" href="'+r.url+'" target="_blank" rel="noopener">'+esc(r.urlLabel||"開啟")+'</a>';
+  return '<div class="r"><div class="info"><b>'+esc(r.name)+'</b><small>'+esc(r.desc)+'</small></div><div class="acts">'+acts+'</div></div>';
+}
+
+function nav(showBack){
+  var h = '<div class="nav no-print">';
+  if(showBack) h += '<button class="btn ghost" data-act="back">上一步</button>';
+  h += '<button class="btn ghost" data-act="restart">重新開始</button></div>';
+  return h;
+}
+
+function commonTail(){
+  return ''+
+  '<div class="card"><h2>接下來可能會發生什麼</h2>'+
+  '<details><summary>報案與筆錄</summary><p>警察會製作筆錄。兒少被害人在偵查或審理中受詢問時，縣市政府會指派社工陪同，你可以請求盡量減少孩子重複陳述。</p></details>'+
+  '<details><summary>縣市政府社工會跟你聯繫</summary><p>警察、學校、醫療等單位知悉後依法須通報。社工會評估孩子的需要，提供陪同、心理、法律等協助。社工聯繫不代表你做錯了什麼。</p></details>'+
+  '<details><summary>下架需要時間</summary><p>國內與大型平台通常處理較快，部分境外網站較慢。同一影像可能重複出現，每一次都可以再申訴，記得持續記錄新網址。</p></details>'+
+  '<details><summary>法律協助</summary><p>可以諮詢法律扶助基金會，了解告訴、保護措施與民事求償的選項。</p></details>'+
+  '</div>'+
+  '<div class="card"><h2>你也需要被照顧</h2>'+
+  '<p>震驚、憤怒、自責，都是正常的反應。孩子會從你的反應判斷事情有多嚴重，你穩下來，孩子才有辦法穩下來。</p>'+
+  '<p>找一位你信任的大人一起分擔，不要一個人扛。需要說話時，1925 安心專線與 113 都是 24 小時。</p>'+
+  '<div class="res">'+resItem("r1925")+resItem("r113")+'</div></div>';
+}
+
+function render(id){
+  var n = N[id], h = "";
+  window.scrollTo(0,0);
+
+  if(n.type === "intro"){
+    h += '<div class="card">'+
+      '<span class="step-tag">給家長的行動指引</span>'+
+      '<h1>孩子的性影像被散布、被威脅，<br>現在該怎麼辦？</h1>'+
+      '<p>不管你是剛發現，還是已經報案、正在等待後續，這份指引都會告訴你現在能做的事、要避免的事，以及可以找誰幫忙。</p>'+
+      '<p><b>先記住一件事：這不是孩子的錯。</b>錯的是散布、威脅、索取影像的人。</p>'+
+      '</div>'+
+      '<button class="door hot" data-go="safety"><b>正在發生，需要現在處理</b><span>剛發現、還沒報案或還沒申訴下架，一步一步帶你確認狀況</span></button>'+
+      '<button class="door" data-go="after"><b>已經處理過了，接下來呢？</b><span>事後怎麼跟孩子談、跟男孩談性與網路安全、復原期觀察、司法流程</span></button>'+
+      '<div class="card"><h3>關於這份指引</h3>'+
+      '<p class="note">這個頁面不會記錄你的任何選擇，也不會傳送資料。右上角「快速離開」可立即跳離本頁。</p>'+
+      '<p class="note">本指引適用於未滿 18 歲的孩子。內容為一般性指引，個別情況請向下列專業單位諮詢。</p>'+
+      '<div class="res">'+resItem("siarc")+resItem("r113")+'</div></div>';
+  }
+
+  else if(n.type === "q"){
+    h += '<div class="progress"><i style="width:'+n.pct+'%"></i></div>'+
+      '<div class="card"><span class="step-tag">'+esc(n.tag)+'</span>'+
+      '<h2>'+esc(n.title)+'</h2><p class="lead">'+esc(n.lead)+'</p><div class="opts">';
+    n.opts.forEach(function(o){
+      h += '<button class="opt" data-go="'+o.go+'"><b>'+esc(o.t)+'</b><span>'+esc(o.s)+'</span></button>';
+    });
+    h += '</div></div>'+nav(stack.length>0);
+  }
+
+  else if(n.type === "urgent"){
+    h += '<div class="urgent"><h2>先處理安全，其他事情可以等</h2>'+
+      '<p><b>孩子說想死、想傷害自己，或已有自傷行為：</b>立即撥打 119 或 110。不要讓孩子獨處，先把可能用來傷害自己的物品移開。</p>'+
+      '<p><b>對方知道住址、約孩子見面、正在逼迫：</b>立即撥打 110。</p>'+
+      '<p><b>不確定嚴不嚴重：</b>撥打 1925 安心專線或 113，跟專業人員一起判斷。</p>'+
+      '<div class="res">'+resItem("r110")+resItem("r119")+resItem("r1925")+resItem("r113")+'</div></div>'+
+      '<div class="card"><h3>陪在孩子身邊時可以說</h3>'+
+      '<p>「我在這裡，我不會離開。」「你現在很痛苦，我們一起找人幫忙。」</p>'+
+      '<p class="note">不需要急著問發生了什麼事，安全確認之後再談。</p></div>'+
+      '<div class="nav no-print"><button class="btn" data-go="type">孩子已經安全，繼續下一步</button>'+
+      '<button class="btn ghost" data-act="back">上一步</button></div>';
+  }
+
+  else if(n.type === "plan"){
+    h += '<div class="progress"><i style="width:100%"></i></div>'+
+      '<div class="card"><span class="step-tag">'+esc(n.tag)+'</span><h2>'+esc(n.title)+'</h2><p class="lead">'+esc(n.lead)+'</p></div>';
+
+    h += '<div class="say"><h3>第一句話，可以這樣說</h3><ul>';
+    SAY_CORE.forEach(function(s){ h += '<li>「'+esc(s)+'」</li>'; });
+    h += '</ul><p class="avoid">'+esc(SAY_AVOID)+'</p></div>';
+
+    h += '<div class="card"><h3>現在就做（完成一項勾一項）</h3><ol class="todo">';
+    n.todo.forEach(function(t,i){
+      var key = id+"-"+i, on = checks[key];
+      h += '<li class="'+(on?"done":"")+'"><input type="checkbox" data-key="'+key+'" '+(on?"checked":"")+' aria-label="'+esc(t[0])+'">'+
+           '<div class="txt"><b><span class="n"></span>'+esc(t[0])+'</b><small>'+esc(t[1])+'</small></div></li>';
+    });
+    h += '</ol></div>';
+
+    h += '<div class="dont"><h3>先不要這樣做</h3><ul>';
+    n.dont.forEach(function(d){ h += '<li>'+esc(d)+'</li>'; });
+    h += '</ul></div>';
+
+    if(n.more) h += '<button class="linkbtn no-print" data-go="'+n.more.go+'">'+esc(n.more.t)+'</button>';
+
+    h += '<div class="card"><h2>可以找誰幫忙</h2><div class="res">';
+    n.res.forEach(function(r){ h += resItem(r); });
+    h += '</div></div>';
+
+    h += commonTail();
+
+    h += '<div class="nav no-print">'+
+      '<button class="btn" data-act="print">列印或存成 PDF</button>'+
+      '<button class="btn ghost" data-go="type">看其他狀況</button>'+
+      '<button class="btn ghost" data-act="restart">重新開始</button></div>';
+  }
+
+  else if(n.type === "hub"){
+    h += '<div class="card"><span class="step-tag">'+esc(n.tag)+'</span><h2>'+esc(n.title)+'</h2><p class="lead">'+esc(n.lead)+'</p>'+
+      '<p><b>這不是孩子的錯，也不是你的錯。</b></p></div>';
+    n.items.forEach(function(it){
+      h += '<button class="door" data-go="'+it.go+'"><b>'+esc(it.t)+'</b><span>'+esc(it.s)+'</span></button>';
+    });
+    h += '<div class="card"><h2>有新的狀況時</h2>'+
+      '<p>對方再次聯繫、發現影像出現在網路上、孩子情緒明顯變差，請主動聯繫負責你們的社工或承辦員警。</p>'+
+      '<div class="res">';
+    n.res.forEach(function(r){ h += resItem(r); });
+    h += '</div></div>'+nav(stack.length>0);
+  }
+
+  else if(n.type === "guide"){
+    h += '<div class="card"><span class="step-tag">'+esc(n.tag)+'</span><h2>'+esc(n.title)+'</h2><p class="lead">'+esc(n.lead)+'</p></div>';
+    h += '<div class="card">';
+    n.secs.forEach(function(s){
+      h += '<div class="sec"><h3>'+esc(s.h)+'</h3>';
+      (s.p||[]).forEach(function(x){ h += '<p>'+esc(x)+'</p>'; });
+      if(s.list){ h += '<ul>'; s.list.forEach(function(x){ h += '<li>'+esc(x)+'</li>'; }); h += '</ul>'; }
+      if(s.say){ h += '<div class="quote">'; s.say.forEach(function(x){ h += '<p>'+esc(x)+'</p>'; }); h += '</div>'; }
+      if(s.bad){ h += '<div class="bad">'; s.bad.forEach(function(x){ h += '<p>・'+esc(x)+'</p>'; }); h += '</div>'; }
+      if(s.p2) h += '<p class="note">'+esc(s.p2)+'</p>';
+      h += '</div>';
+    });
+    h += '</div>';
+    if(n.res){
+      h += '<div class="card"><h2>可以找誰幫忙</h2><div class="res">';
+      n.res.forEach(function(r){ h += resItem(r); });
+      h += '</div></div>';
+    }
+    h += '<div class="nav no-print">'+
+      '<button class="btn" data-act="print">列印或存成 PDF</button>'+
+      '<button class="btn ghost" data-go="after">回到事後單元</button>'+
+      '<button class="btn ghost" data-act="restart">回首頁</button></div>';
+  }
+
+  h += '<p class="foot">資源資訊查核：2026 年 10 月<br>本指引為一般性資訊，不取代專業人員的個別評估</p>';
+  app.innerHTML = h;
+  var first = app.querySelector("h1,h2");
+  if(first){ first.setAttribute("tabindex","-1"); first.focus({preventScroll:true}); }
+}
+
+function go(id){ stack.push(current); current = id; render(id); }
+var current = "start";
+
+app.addEventListener("click", function(e){
+  var t = e.target.closest("[data-go],[data-act]");
+  if(!t) return;
+  if(t.dataset.go){ go(t.dataset.go); return; }
+  var a = t.dataset.act;
+  if(a === "back" && stack.length){ current = stack.pop(); render(current); }
+  else if(a === "restart"){ stack = []; checks = {}; current = "start"; render(current); }
+  else if(a === "print"){ window.print(); }
+});
+
+app.addEventListener("change", function(e){
+  var c = e.target;
+  if(c.matches('input[type="checkbox"][data-key]')){
+    checks[c.dataset.key] = c.checked;
+    c.closest("li").classList.toggle("done", c.checked);
+  }
+});
+
+document.getElementById("exitBtn").addEventListener("click", function(){
+  app.innerHTML = "";
+  window.location.replace("https://www.google.com/");
+});
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape"){ document.getElementById("exitBtn").click(); }
+});
+
+render(current);
+})();
+</script>
+</body>
+</html>
